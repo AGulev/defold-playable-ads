@@ -312,13 +312,13 @@
           // in --admob builds, but another host may still provide a compatible ExitApi.
           if (typeof FbPlayableAd !== "undefined" && typeof FbPlayableAd.onCTAClick === "function") {
             FbPlayableAd.onCTAClick();
+          } else if (typeof window.install === "function") {
+            window.install && window.install();
           } else if (isMraidAvailable()) {
             var url = /iphone|ipad|ipod|macintosh/i.test(window.navigator.userAgent.toLowerCase())
               ? window.PlayableData.URL_IOS
               : window.PlayableData.URL_ANDROID;
             getMraidApi().open(url);
-          } else if (typeof window.install === "function") {
-            window.install && window.install();
           } else if (window.ExitApi && typeof window.ExitApi.exit === "function") {
             ExitApi.exit();
           } else {
